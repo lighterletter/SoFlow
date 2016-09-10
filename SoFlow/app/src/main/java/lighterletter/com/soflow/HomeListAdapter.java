@@ -8,8 +8,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.VideoView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
+    private List<Video> videos;
+
+    public HomeListAdapter() {
+        setItems(new ArrayList<Video>());
+    }
+
+    public HomeListAdapter(List<Video> videos){
+       setItems(videos);
+    }
+
+    public void setItems(List<Video> videos){
+        this.videos = videos;
+    }
 
 
     @Override
@@ -17,35 +34,46 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.home_item, parent, false);
+        View view = inflater.inflate(R.layout.home_item, parent, false);
         // Return a new holder instance
-        ViewHolder viewHolder = new HomeListAdapter.ViewHolder(contactView);
-
+        ViewHolder viewHolder = new HomeListAdapter.ViewHolder(view);
         return viewHolder;
 
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        VideoView video = holder.video;
-        Button button = holder.button;
+        holder.bindView(videos.get(position));
     }
 
 
     @Override
     public int getItemCount() {
-        return 20;
+        return videos.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        VideoView video;
-        Button button;
+        VideoView videoView;
+        Button commentBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            video = (VideoView) itemView.findViewById(R.id.user_video);
-            button = (Button) itemView.findViewById(R.id.view_comments);
+            videoView = (VideoView) itemView.findViewById(R.id.user_video);
+            commentBtn = (Button) itemView.findViewById(R.id.view_comments);
+        }
+
+        public void bindView(Video video){
+            videoView.setVideoURI(video.getUri());
+            commentBtn.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch(view.getId()){
+                case R.id.user_video:
+                case R.id.view_comments: //todo
+            }
         }
     }
 }
