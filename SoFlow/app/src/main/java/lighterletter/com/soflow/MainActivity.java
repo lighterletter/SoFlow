@@ -15,11 +15,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initHomeList(){
-        FragmentManager fg = getSupportFragmentManager();
-        FragmentTransaction transaction = fg.beginTransaction();
-
-        HomeFragment homeScreen = new HomeFragment();
-        transaction.replace(R.id.main_container, homeScreen);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        HomeFragment homeFragment = new HomeFragment();
+        transaction.replace(R.id.main_container, homeFragment);
         transaction.commit();
     }
 
