@@ -7,8 +7,22 @@ import android.net.Uri;
  */
 public class Video implements Model {
 
+    String url;
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Video() {
+    }
+
+    public Video(String url) {
+
+        this.url = url;
+    }
+
     @Override
-    public Uri getUri() {
-        return null; //todo
+    public String getUrl() {
+        return url;
     }
 }

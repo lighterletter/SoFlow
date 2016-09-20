@@ -9,5 +9,5 @@ import android.view.View;
  */
 public interface Model {
 
-    Uri getUri();
+    String getUrl();
 }
