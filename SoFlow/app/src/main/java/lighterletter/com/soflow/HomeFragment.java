@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +24,21 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new HomeListAdapter();
+        List<Video> videoList = new ArrayList<>();
+
+        Video test = new Video("http://techslides.com/demos/sample-videos/small.mp4");
+        Video test2 = new Video("http://techslides.com/demos/sample-videos/small.mp4");
+        Video test3 = new Video("http://techslides.com/demos/sample-videos/small.mp4");
+        Video test4 = new Video("http://techslides.com/demos/sample-videos/small.mp4");
+        Video test5 = new Video("http://techslides.com/demos/sample-videos/small.mp4");
+
+        videoList.add(test);
+        videoList.add(test2);
+        videoList.add(test3);
+        videoList.add(test4);
+        videoList.add(test5);
+        adapter = new HomeListAdapter(videoList);
+
     }
 
     @Nullable

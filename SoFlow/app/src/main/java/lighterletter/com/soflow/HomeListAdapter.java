@@ -1,6 +1,8 @@
 package lighterletter.com.soflow;
 
 import android.content.Context;
+import android.media.session.MediaController;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,36 +16,40 @@ import java.util.List;
 
 
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
+
     private List<Video> videos;
+    private Context context;
 
     public HomeListAdapter() {
         setItems(new ArrayList<Video>());
     }
 
-    public HomeListAdapter(List<Video> videos){
-       setItems(videos);
+    public HomeListAdapter(List<Video> videos) {
+        setItems(videos);
     }
 
-    public void setItems(List<Video> videos){
+    public void setItems(List<Video> videos) {
         this.videos = videos;
     }
 
 
     @Override
     public HomeListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         // Inflate the custom layout
         View view = inflater.inflate(R.layout.home_item, parent, false);
         // Return a new holder instance
         ViewHolder viewHolder = new HomeListAdapter.ViewHolder(view);
-        return viewHolder;
 
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bindView(videos.get(position));
+
     }
 
 
@@ -63,14 +69,16 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             commentBtn = (Button) itemView.findViewById(R.id.view_comments);
         }
 
-        public void bindView(Video video){
-            videoView.setVideoURI(video.getUri());
+        public void bindView(Video video) {
+            Uri vidUri = Uri.parse(video.getUrl());
+            videoView.setVideoURI(vidUri);
+            videoView.setMediaController(new android.widget.MediaController(context));
             commentBtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            switch(view.getId()){
+            switch (view.getId()) {
                 case R.id.user_video:
                 case R.id.view_comments: //todo
             }
